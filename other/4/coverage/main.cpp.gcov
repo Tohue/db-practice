@@ -1,0 +1,107 @@
+        -:    0:Source:main.cpp
+        -:    0:Programs:1
+        -:    1:#include <iostream>
+        -:    2:using namespace std;
+        -:    3:
+        -:    4:struct List
+        -:    5:{
+        -:    6:    int value;
+        -:    7:    List* next;
+        -:    8:};
+        -:    9:
+        -:   10:static List* Head = nullptr, *End = nullptr;
+        -:   11:static int massive[] = {1,2,3,4,5,6,7,8,9,10};
+        -:   12:
+        1:   13:List* Adding() {
+        1:   14:    List* head = nullptr, *current = nullptr;
+       11:   15:    for (size_t i = 0; i < sizeof(massive)/sizeof(massive[0]); ++i) {
+       10:   16:        if (!current) {
+        1:   17:            current = new List();
+        1:   18:            current->value = massive[i];
+        1:   19:            head = current;
+        1:   20:            current->next = nullptr;
+        -:   21:        } else {
+        9:   22:            current->next = new List();
+        9:   23:            current = current->next;
+        9:   24:            current->value = massive[i];
+        9:   25:            current->next = nullptr;
+        -:   26:        }
+        -:   27:    }
+        1:   28:    Head = head;
+        1:   29:    End = current;
+        1:   30:    return head;
+        -:   31:}
+        -:   32:
+       16:   33:void Print(List* list) {
+       31:   34: 	while (list) {
+       15:   35: 		cout << list->value << " ";
+       15:   36: 		list = list->next;
+        -:   37: 	}
+        1:   38: 	cout << endl;
+        1:   39: }
+        -:   40:
+        1:   41: void Free(List* &Head) {
+        1:   42: 	List* temp = nullptr;
+       31:   43: 	while (Head) {
+       15:   44: 		temp = Head->next;
+       15:   45: 		delete Head;
+       15:   46: 		Head = temp;
+        -:   47: 	}
+        1:   48: }
+        1:   49:int main() {
+        1:   50:    List* current = Adding(), *after_current = nullptr;
+        1:   51:    int min = current->value;
+        1:   52:    int i = 0;
+        1:   53:    bool flag = true;
+       19:   54:    while (current) {
+       10:   55:        i++;
+       10:   56:        if (current == Head && flag) {
+        1:   57:            after_current = current;
+        9:   58:        } else if (current != End ){
+        9:   59:            after_current = current->next;
+        -:   60:        }
+        -:   61:
+       10:   62:        if (after_current == Head && flag) {
+        1:   63:            List* adding = new List(); adding->value = i;
+        1:   64:            if (after_current->value % 2) {
+        1:   65:                adding->next = current->next;
+        1:   66:                current->next = adding;
+        1:   67:                Head = adding;
+        1:   68:                List* deleting = current;
+        1:   69:                current = adding;
+        1:   70:                delete deleting;
+        1:   71:                flag = false;
+    #####:   72:            } else if (flag) {
+    #####:   73:                adding->next = current->next;
+    #####:   74:                current->next = adding;
+    #####:   75:                Head = current;
+    #####:   76:                current = current->next;
+    #####:   77:                flag = false;
+        1:   78:            }
+        9:   79:        } else if (after_current == End) {
+        1:   80:            List* adding = new List(); adding->value = i;
+        1:   81:            if (after_current->value % 2) {
+    #####:   82:                List* deleting = after_current;
+    #####:   83:                current->next = adding;
+    #####:   84:                delete deleting;
+    #####:   85:                break;
+        -:   86:            } else {
+        1:   87:                after_current->next = adding;
+        1:   88:                break;
+        -:   89:            }
+        -:   90:        } else {
+        8:   91:            List* adding = new List(); adding->value = static_cast<int>(i);
+        8:   92:            if (after_current->value % 2) {
+        4:   93:                adding->next = after_current->next;
+        4:   94:                current = current->next = adding;
+        -:   95:            } else {
+        4:   96:                adding->next = after_current->next;
+        4:   97:                after_current->next = adding;
+        4:   98:                current = after_current->next;
+        -:   99:            }
+        -:  100:        }
+        -:  101:    }
+        1:  102:    Print(Head);
+        1:  103:    Free(Head);
+        1:  104:    return 0;
+        3:  105:}

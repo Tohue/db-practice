@@ -1,0 +1,29 @@
+        -:    0:Source:/home/cherenkov/ucheba/nelidov/db-practice/src/OEF.cpp
+        -:    0:Programs:4
+        -:    1:#include "OEF.h"
+        -:    2:
+        -:    3:
+    #####:    4:OEF::OEF(std::string n, std::string con, float opprice, float avgchg, int t) :
+        -:    5:    name(n), 
+        -:    6:    companyName(con),
+        -:    7:    openingPrice(opprice),
+        -:    8:    avgChange(avgchg),
+    #####:    9:    type(t){
+        -:   10:
+    #####:   11:}
+        -:   12:
+    #####:   13:std::string OEF::get_name() {
+    #####:   14:    return name;
+        -:   15:}
+    #####:   16:std::string OEF::get_comp_name() {
+    #####:   17:    return companyName;
+        -:   18:}
+    #####:   19:float OEF::get_op_price() {
+    #####:   20:    return openingPrice;
+        -:   21:}
+    #####:   22:float OEF::get_avg_change(){
+    #####:   23:    return avgChange;
+        -:   24:}
+    #####:   25:int OEF::get_type() {
+    #####:   26:    return type;
+        -:   27:}

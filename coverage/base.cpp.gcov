@@ -1,0 +1,12 @@
+        -:    0:Source:/home/cherenkov/ucheba/nelidov/db-practice/src/base.cpp
+        -:    0:Programs:4
+        -:    1:#include "base.h"
+        -:    2:
+    #####:    3:int Base::add(std::string st_name, std::string compname, float price, float avgchg, int oeftype) {
+    #####:    4:    OEF * oef = new OEF(st_name, compname, price, avgchg, oeftype);
+    #####:    5:    fundList.push_back(*oef);
+    #####:    6:}
+        -:    7:
+    #####:    8:std::vector<OEF> Base::getList() {
+    #####:    9:    return fundList;
+        -:   10:}

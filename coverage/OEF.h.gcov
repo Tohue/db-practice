@@ -1,0 +1,31 @@
+        -:    0:Source:/home/cherenkov/ucheba/nelidov/db-practice/include/OEF.h
+        -:    0:Programs:4
+        -:    1:#ifndef _OEF_H_
+        -:    2:#define _OEF_H_
+        -:    3:
+        -:    4:#include <string>
+        -:    5:
+    #####:    6:struct OEF {
+        -:    7:    private:
+        -:    8:        int type;
+        -:    9:        float openingPrice;
+        -:   10:        float avgChange;
+        -:   11:        std::string name;
+        -:   12:        std::string companyName;
+        -:   13:    public:
+        -:   14:        OEF(std::string n, std::string con, float opprice, float avgchg, int t);
+        -:   15:        int get_type();
+        -:   16:        float get_op_price();
+        -:   17:        float get_avg_change();
+        -:   18:        std::string get_name();
+        -:   19:        std::string get_comp_name();
+        -:   20:        void set_type(int new_type);
+        -:   21:        void set_op_price(float new_price);
+        -:   22:        void set_avg_change(float new_change);
+        -:   23:        void set_name(std::string new_name);
+        -:   24:        void set_comp_name(std::string new_comp_name);
+        -:   25:        void setAvgChange(float fresh);
+        -:   26:
+        -:   27:};
+        -:   28:
+        -:   29:#endif

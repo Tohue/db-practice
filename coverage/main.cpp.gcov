@@ -1,0 +1,10 @@
+        -:    0:Source:/home/cherenkov/ucheba/nelidov/db-practice/src/main.cpp
+        -:    0:Programs:4
+        -:    1:#include <iostream>
+        -:    2:#include <vector>
+        -:    3:#include "interact.h"
+        -:    4:
+        1:    5:int main() {
+        1:    6:    Interact * interact = new Interact();
+        1:    7:    return interact->init();
+        3:    8:}

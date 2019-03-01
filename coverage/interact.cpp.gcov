@@ -1,0 +1,236 @@
+        -:    0:Source:/home/cherenkov/ucheba/nelidov/db-practice/src/interact.cpp
+        -:    0:Programs:4
+        -:    1:#include "interact.h"
+        -:    2:
+        1:    3:Interact::Interact() {
+        1:    4:    base = new Base();
+        1:    5:    is_on = true;
+        1:    6:    init();
+        1:    7:}
+        -:    8:
+        1:    9:void Interact::clear() {
+        1:   10:    std::cout << "\x1B[2J\x1B[H";
+        1:   11:}
+        -:   12:
+        3:   13:int Interact::init() {
+        4:   14:    while(is_on) {
+        1:   15:        clear();
+        1:   16:        draw_main_choose();
+        -:   17:    }
+        2:   18:    return 0;
+        -:   19:}
+        -:   20:
+        1:   21:void Interact::draw_main_choose() {
+        -:   22:    std::cout << "Please, choose what's next: \n" <<
+        -:   23:         "1. Add OEF record;\n"             <<
+        -:   24:         "2. Show all present records;\n"   <<
+        -:   25:         "3. Find particular record;\n"     <<
+        -:   26:         "4. Load database from file; \n"   <<
+        1:   27:         "5. Save database;\n"              <<
+        1:   28:         "6. Exit.\n";
+        -:   29:    int decision;
+        1:   30:    while(!(std::cin >> decision || (decision < 1 && decision > 6))){
+    #####:   31:        std::cout << "Bad value!";
+    #####:   32:        std::cin.clear();
+    #####:   33:        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        -:   34:    }
+        1:   35:    switch (decision) {
+    #####:   36:        case 1:
+    #####:   37:            draw_add();
+    #####:   38:            break;            
+    #####:   39:        case 2:
+    #####:   40:            draw_base();
+    #####:   41:            break;
+    #####:   42:        case 3:
+    #####:   43:            draw_find();
+    #####:   44:            break;
+    #####:   45:        case 4:
+    #####:   46:            draw_load();
+    #####:   47:            break;
+    #####:   48:        case 5:
+    #####:   49:            draw_save();
+    #####:   50:            break;
+        1:   51:        case 6:
+        1:   52:            is_on = false;
+        1:   53:            break;
+        -:   54:    }
+        -:   55:
+        -:   56:
+        1:   57:}
+        -:   58:
+    #####:   59:void Interact::draw_add() {
+    #####:   60:    clear();
+    #####:   61:    std::string name, compName;
+        -:   62:    int type;
+        -:   63:    float op_price, avg_change;
+    #####:   64:    std::cout << "Enter the name: \n" << std::endl;
+    #####:   65:    std::cin >> name;
+    #####:   66:    std::cout << "Enter the company name: \n";
+    #####:   67:    std::cin >>compName;
+    #####:   68:    std::cout << "Enter the type: (1)interval, (2)open, (3)closed\n";
+    #####:   69:    while(!(std::cin >> type || (type > 0 && type < 4))){
+    #####:   70:        std::cout << "Bad value!";
+    #####:   71:        std::cin.clear();
+    #####:   72:        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        -:   73:    }
+    #####:   74:    std::cout << "Enter the opening price: \n";
+    #####:   75:    while(!(std::cin >> op_price)){
+    #####:   76:        std::cout << "Bad value!";
+    #####:   77:        std::cin.clear();
+    #####:   78:        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        -:   79:    }
+    #####:   80:    std::cout << "Enter the average price change:\n";
+    #####:   81:    while(!(std::cin >> avg_change)){
+    #####:   82:        std::cout << "Bad value!";
+    #####:   83:        std::cin.clear();
+    #####:   84:        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        -:   85:    }
+    #####:   86:    base->add(name,compName,op_price, avg_change, type);
+        -:   87:    
+    #####:   88:}
+        -:   89:
+        -:   90:
+    #####:   91:void Interact::draw_base() {    
+    #####:   92:    if(base->getList().size() == 0)
+    #####:   93:        std::cout << "The base is empty!"<< std::endl;
+        -:   94:    else {
+    #####:   95:        for (auto &it : base->getList()) {
+    #####:   96:            std::cout << it.get_name() << "  " << it.get_comp_name() << "  " << it.get_type() << " "
+    #####:   97:                  << it.get_op_price() << "  " << it.get_avg_change() << std::endl;
+        -:   98:        }
+        -:   99:    }
+        -:  100:
+    #####:  101:    std::cout << "\n\nType something to continue...\n";
+    #####:  102:    std::string s;
+    #####:  103:    std::cin >> s;
+    #####:  104:}
+        -:  105:
+    #####:  106:int Interact::draw_found(std::string name, float price) {
+        -:  107:        std::cout << "This record found:  "   << 
+    #####:  108:         name << "  " << price << std::endl   <<
+        -:  109:              "\nWhat should we do next?\n"   <<
+        -:  110:              "1. Delete it;\n"               << 
+    #####:  111:              "2. Change it;\n"               <<
+    #####:  112:              "3. Nothing, I'm just watching\n";
+        -:  113:    int dec;
+    #####:  114:    std::cin >> dec; 
+    #####:  115:    return dec;
+        -:  116:}
+        -:  117:
+        -:  118:
+    #####:  119:void Interact::draw_find() {
+    #####:  120:    clear();
+        -:  121:    std::cout << "Please, choose which field should I find: \n" <<
+        -:  122:         "1. Name;\n"             <<
+        -:  123:         "2. Company name;\n"   <<
+    #####:  124:         "3. Number in database;\n"     <<
+    #####:  125:         "4. Return me back\n"; 
+        -:  126:
+        -:  127:    int decision;
+    #####:  128:    while(!(std::cin >> decision) || (decision < 1 || decision > 4)){
+    #####:  129:        std::cout << "Bad value!";
+    #####:  130:        std::cin.clear();
+    #####:  131:        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        -:  132:    }
+    #####:  133:    switch(decision) {
+    #####:  134:        case 1:
+    #####:  135:            search_sequence(byName);
+    #####:  136:            break;
+    #####:  137:        case 2:
+    #####:  138:            search_sequence(byComp);
+    #####:  139:            break;
+    #####:  140:        case 3:
+    #####:  141:            search_sequence(byNum);
+    #####:  142:            break;
+    #####:  143:        case 4:
+    #####:  144:            break;
+        -:  145:    }
+        -:  146:
+    #####:  147:}
+        -:  148:
+    #####:  149:void Interact::search_sequence(search_type type) {
+    #####:  150:    clear();
+    #####:  151:    if (type == byName) {
+    #####:  152:        std::string searchName;
+    #####:  153:        std::cout << "Enter the name:\n";
+    #####:  154:        std::cin >> searchName;
+    #####:  155:        int count = 0;
+    #####:  156:        for(auto & it : base->getList()){
+    #####:  157:            if (it.get_name() == searchName)
+    #####:  158:                switch (draw_found(it.get_name(), it.get_op_price())) {
+    #####:  159:                    case 1:
+    #####:  160:                        base->getList().erase(base->getList().begin() + count);
+    #####:  161:                        break; 
+    #####:  162:                    case 2:
+    #####:  163:                        std::cout << "Nah, maybe next time";
+    #####:  164:                        break;
+    #####:  165:                    case 3:
+    #####:  166:                        break;
+        -:  167:                } 
+    #####:  168:            count++;
+        -:  169:        }
+        -:  170:    }
+    #####:  171:    else if (type == byComp){
+    #####:  172:        std::string searchName;
+    #####:  173:        std::cout << "Enter the company name:\n";
+    #####:  174:        std::cin >> searchName;
+    #####:  175:        int count = 0;
+    #####:  176:        for(auto & it : base->getList()){
+    #####:  177:            if (it.get_comp_name() == searchName)
+    #####:  178:                draw_found(it.get_name(), it.get_op_price());
+    #####:  179:            count++;
+        -:  180:        }
+        -:  181:    }
+        -:  182:    else {
+        -:  183:        int num;
+    #####:  184:        std::cout << "Enter the record number:\n";
+    #####:  185:        std::cin >> num;
+    #####:  186:        if(num > base->getList().size())
+    #####:  187:            std::cout << "That's too much";
+        -:  188:        else {
+    #####:  189:            draw_found(base->getList()[num].get_name(), base->getList()[num].get_op_price());
+        -:  190:        }
+        -:  191:    }
+        -:  192:     
+        -:  193:
+    #####:  194:}
+        -:  195:
+    #####:  196:void Interact::draw_load() {
+        -:  197:
+    #####:  198:	if (!base->getList().empty()) base->getList().clear();
+    #####:  199:	std::cout << "Enter the file name to load: ";
+    #####:  200:	std::string fileName; std::cin >> fileName;
+    #####:  201:	std::ifstream file(fileName.c_str());
+    #####:  202:	if (file.is_open()) {
+    #####:  203:		while (!file.eof()) {
+        -:  204:            int type;
+        -:  205:            float openingPrice;
+        -:  206:            float avgChange;
+    #####:  207:            std::string name;
+    #####:  208:            std::string companyName;
+    #####:  209:			file >> type;
+    #####:  210:			file >> openingPrice; 
+    #####:  211:			file >> avgChange;
+    #####:  212:			file >> name; 
+    #####:  213:			file >> companyName;
+    #####:  214:			if (file.eof()) break;
+    #####:  215:			base->add(name, companyName, openingPrice, avgChange, type);
+        -:  216:		}
+        -:  217:	}
+    #####:  218:}
+        -:  219:
+    #####:  220:void Interact::draw_save() {
+    #####:  221:	if (!base->getList().empty()) {
+    #####:  222:		std::cout << "Enter the file name to save: ";
+    #####:  223:		std::string fileName; std::cin >> fileName;
+    #####:  224:		std::ofstream file(fileName.c_str());
+    #####:  225:		for (int i = 0; i < base->getList().size(); i++) {
+    #####:  226:			file << base->getList()[i].get_type() << std::endl;
+    #####:  227:			file << base->getList()[i].get_op_price() << std::endl;
+    #####:  228:			file << base->getList()[i].get_avg_change() << std::endl;
+    #####:  229:			file << base->getList()[i].get_name() << std::endl;
+    #####:  230:			file << base->getList()[i].get_comp_name() << std::endl;
+        -:  231:		}
+    #####:  232:	} else std::cout << "The list is empty.";
+    #####:  233:	std::cin.get();
+        3:  234:}

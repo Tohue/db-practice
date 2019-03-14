@@ -18,7 +18,7 @@ clean:
 	rm  *.o
 
 main.o: main.cpp
-	g++ -c main.cpp
+	g++ -c main.cpp $(CFLAGS)
 
 main: main.cpp
 	g++ -o out $(CFLAGS) main.cpp

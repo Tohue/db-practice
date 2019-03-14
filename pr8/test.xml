@@ -1,0 +1,81 @@
+<?xml  version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+<book>
+  <bookinfo>
+    <title>Application documentation Sheduler</title>
+    <author>
+      <firstname>Caroline</firstname>
+      <surname>Gafiullova</surname>
+      <affiliation>
+        <address>
+          <email>cgafiullova@gmail.com></email>
+        </address>
+      </affiliation>
+    </author>
+    <copyright>
+      <year>2019</year>
+      <title>All rights reserved.</title>
+    </copyright>
+  </bookinfo>    
+  <chapter>
+    <title>Main menu</title>
+    <sect1>
+      <para>Click "Nachat' igru" button to start the game</para>
+      <para>Click "Nastroykee" button to go to settings</para>
+    </sect1>
+    <mediaobject>
+			<imageobject>
+				<imagedata width="70%" height="70%" alignment="center" scalefit="1" fileref="images/1.jpg" />
+			</imageobject>
+		</mediaobject>	
+  </chapter>
+
+  <chapter>
+    <title>Game is on!</title>
+    <sect1>
+      <para>Here you can play and watch ads (I'm bot being paid for that) </para>
+    </sect1>
+    <mediaobject>
+			<imageobject>
+				<imagedata width="70%" height="70%" alignment="center" scalefit="1" fileref="images/2.jpg" />
+			</imageobject>
+		</mediaobject>	
+  </chapter>
+
+  <chapter>
+    <title>Responsive design!!</title>
+    <sect1>
+      <para>Here you can see that the program can easily be run under any resolution</para>
+    </sect1>
+    <mediaobject>
+			<imageobject>
+				<imagedata width="70%" height="70%" alignment="center" scalefit="1" fileref="images/3.jpg" />
+			</imageobject>
+		</mediaobject>	
+  </chapter>
+
+    <chapter>
+    <title>Settings window</title>
+    <sect1>
+      <para>You might enable "Rezhim pobeditelya"</para>
+    </sect1>
+    <mediaobject>
+			<imageobject>
+				<imagedata width="70%" height="70%" alignment="center" scalefit="1" fileref="images/4.jpg" />
+			</imageobject>
+		</mediaobject>	
+  </chapter>
+
+    <chapter>
+    <title>Sacrifice window</title>
+    <sect1>
+      <para>God bless you!!!</para>
+    </sect1>
+    <mediaobject>
+			<imageobject>
+				<imagedata width="70%" height="70%" alignment="center" scalefit="1" fileref="images/5.jpg" />
+			</imageobject>
+		</mediaobject>	
+  </chapter>
+</book>

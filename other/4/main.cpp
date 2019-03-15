@@ -4,7 +4,7 @@
 #include <math.h>
 using namespace std;
 void run(vector<int> list) {
-int sum;
+int sum = 0;
 for(int i = 0; i < list.size(); i++) {
     if(list[i]>=0) {
         cout<<list[i]<<" "<< (int)pow(list[i], 3) << " ";

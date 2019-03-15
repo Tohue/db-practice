@@ -1,14 +1,22 @@
-global testf
-section .text
-testf:
-mov r13, rdi
-mov r14, rsi
-mov r15, rdx
-imul r8, r14, 2
-mov r9, r13
-sub r9, r8
-mov rax, r9
-xor rdx, rdx
-idiv r15
+;edi, esi, edx;
+;(x+2*y+3*z)/4
 
-ret 
+format ELF64 
+
+section '.text' executable
+
+public testf
+testf:
+        imul esi, 2
+        imul edx, 3
+        add esi, edx
+        add edi, esi
+        mov eax, edi
+
+
+        mov edx, 0
+        mov esi, 4
+        cdq
+        idiv esi
+
+        ret

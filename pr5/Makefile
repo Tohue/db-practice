@@ -1,7 +1,5 @@
-all: compile
-
-pr.o: pr.asm
-	nasm -f elf64 pr.asm
-
-compile: pr.o
-	gcc pr.c pr.o && ./a.out
+test:
+	fasm pr.asm pr.o 
+	g++ -no-pie -c -fPIC pr.cpp -o out.o   
+	g++ -o test out.o pr.o 
+	./test
